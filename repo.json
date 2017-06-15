@@ -16,7 +16,7 @@
 
             "binaries"    : [
                 {
-                    "title"      : "arduboy-command-passthrough"
+                    "title"      : "arduboy-command-passthrough",
                     "filename" : "https://raw.githubusercontent.com/rubienr/arduboy-command-passthrough/master/arduboy-mate-repository/arduboy-command-passthrough.ino.hex",
                     "device"    : "Arduboy"
                 }
