@@ -23,7 +23,8 @@
             ],
             "screenshots": [
                 "https://github.com/rubienr/arduboy-command-passthrough/raw/master/demo/command-line-hello-world.jpg",
-                "https://github.com/rubienr/arduboy-command-passthrough/raw/master/demo/arduboy-hello-world.jpg"
+                "https://github.com/rubienr/arduboy-command-passthrough/raw/master/demo/arduboy-hello-world.jpg",
+                "https://github.com/rubienr/arduboy-command-passthrough/raw/master/demo/command-editor.jpg"
             ],
             "arduboy": ""
         }

@@ -16,3 +16,12 @@ ardu@boy:~$ echo "arduboy.display"               > $ARDUBOY_SERIAL
 ```
 
 ![result on Arduboy](./demo/arduboy-hello-world.jpg)
+
+
+Quick and Ddirty UI
+===================
+```bash
+ardu@boy:~$ python ./controller-gui.py
+```
+
+![result on Arduboy](./demo/command-editor.jpg)
