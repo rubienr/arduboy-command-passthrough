@@ -8,9 +8,9 @@
         author: "rubienr",
         version: "0.1",
         cover: "https://github.com/rubienr/arduboy-command-passthrough/arduboy-mate-repository/cover.png",
-        hex: "https://github.com/rubienr/arduboy-command-passthrough/arduboy-mate-repository/arduboy-command-passthrough.ino.hex",
+        hex: "https://raw.githubusercontent.com/rubienr/arduboy-command-passthrough/master/arduboy-mate-repository/arduboy-command-passthrough.ino.hex",
         description: "A program passing serial commands directly to Arduboy.",
         model: "Production"
-      },
+      }
     ]
 }
