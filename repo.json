@@ -1,18 +1,31 @@
 {
     "repository"  : "Raoul's Arduboy Repo",
-    "api-version" : "0.5",
+    "api-version" : "1.0",
     "maintainer"  : "rubienr@sbox.tugrat.at",
+    "website"     : "https://github.com/rubienr/",
     "items"       : [
         {
-            "name"        : "Arduboy Command pass Through",
+            "title"       : "Arduboy Command pass Through",
+            "description" : "A program passing serial commands directly to Arduboy.",
+            "genre"       : "Application"
             "device"      : "Arduboy",
             "author"      : "rubienr",
             "version"     : "0.1",
-            "website"     : "https://github.com/rubienr/arduboy-command-passthrough/",
-            "cover"       : "https://raw.githubusercontent.com/rubienr/arduboy-command-passthrough/master/arduboy-mate-repository/cover.png",
-            "hex"         : "https://raw.githubusercontent.com/rubienr/arduboy-command-passthrough/master/arduboy-mate-repository/arduboy-command-passthrough.ino.hex",
-            "description" : "A program passing serial commands directly to Arduboy.",
-            "model"       : "Production"
+            "url"         : "https://github.com/rubienr/arduboy-command-passthrough/",
+            "banner"      : "https://raw.githubusercontent.com/rubienr/arduboy-command-passthrough/master/arduboy-mate-repository/cover.png",
+
+            "binaries"    : [
+                {
+                    "title"      : "arduboy-command-passthrough"
+                    "filename" : "https://raw.githubusercontent.com/rubienr/arduboy-command-passthrough/master/arduboy-mate-repository/arduboy-command-passthrough.ino.hex",
+                    "device"    : "Arduboy"
+                }
+            ],
+            screenshots: [
+                "https://github.com/rubienr/arduboy-command-passthrough/raw/master/demo/command-line-hello-world.jpg",
+                "https://github.com/rubienr/arduboy-command-passthrough/raw/master/demo/arduboy-hello-world.jpg"
+            ],
+            arduboy: ""
         }
     ]
 }
