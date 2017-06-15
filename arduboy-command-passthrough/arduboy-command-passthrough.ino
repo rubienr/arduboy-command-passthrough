@@ -4,7 +4,7 @@
   Copyright (C) 2015 Raoul Rubien
   All rights reserved.
 
-  This implementation reads from serial, parses the input and executes mapped commands with the given arguments so that the Arduboy
+  This implementation reads from serial, interprets the input and executes the mapped command with the given arguments so that the Arduboy
   can be controlled via serial connection.
 
 
@@ -25,12 +25,14 @@
 
 
   Caveat!
-  The implementation does not verify the modifier yet, which sould map as follows:
+  * The implementation does not verify the modifier yet, which sould map as follows:
 
   %s string
   %c char
   %i int
   %u unsigned int
+
+  * The reception throughput depends on the current arduboy's frame rate setting. 
 
 */
 
