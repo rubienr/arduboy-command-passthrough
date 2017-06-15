@@ -1,12 +1,12 @@
 {
     "repository"  : "Raoul's Arduboy Repo",
     "api-version" : "1.0",
-    "maintainer"  : "rubienr@sbox.tugrat.at",
+    "maintainer"  : "rubienr@sbox.tugraz.at",
     "website"     : "https://github.com/rubienr/",
     "items"       : [
         {
             "title"       : "Arduboy Command Pass Through",
-            "description" : "A program passing serial commands directly to Arduboy. It accepts string commands via serial 96008N1 and executes them on the Arduboy, e.g.:\necho \"arduboy.print %s Hello World!\" > /dev/ttyACM0",
+            "description" : "A program passing serial commands directly to Arduboy. It accepts string commands via serial 96008N1 and executes them on the Arduboy, e.g.:\n\nardu@boy:~$ echo arduboy.print %s Hello World! > /dev/ttyACM0\nardu@boy:~$ #or using the Python UI\nardu@boy:~$ python ./controller-gui.py",
             "genre"       : "Application",
             "device"      : "Arduboy",
             "author"      : "rubienr",
