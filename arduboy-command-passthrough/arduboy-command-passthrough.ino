@@ -25,14 +25,14 @@
 
 
   Caveat!
-  * The implementation does not verify the modifier yet, which sould map as follows:
+    The implementation does not verify the modifier yet, which sould map as follows:
 
   %s string
   %c char
   %i int
   %u unsigned int
 
-  * The reception throughput depends on the current arduboy's frame rate setting. 
+    The reception throughput depends on the current arduboy's frame rate setting.
 
 */
 
@@ -44,9 +44,48 @@
 typedef CommandInterpreter Interpreter;
 Globals g;
 
+//----------------------------------------------------------------------------------------------------
+void readInput()
+{
+  while (Serial.available())
+  {
+    char inByte = Serial.read();
+    if (inByte != '\n')
+    {
+      g.serialRxLineBuffer.currentWriteBuffer() += inByte;
+    } else {
+      Serial.write('|');
+      Serial.write('\n');
+      g.serialRxLineBuffer.nextWriteBuffer();
+    }
+    Serial.write(inByte);
+  }
+}
 
+//----------------------------------------------------------------------------------------------------
+void dispatchInput()
+{
+  if (g.serialRxLineBuffer.isEmpty()) 
+  {
+    return;
+  }
 
+  char buffer[30];
+  sprintf(buffer, "interprete buffer -%s-\n", g.serialRxLineBuffer.currentReadBuffer().c_str());
+  Serial.write(buffer);
+ 
+  String &input = g.serialRxLineBuffer.currentReadBuffer();
 
+  int endIdx = input.indexOf(INTERPRETER_WORD_DELIMITER);
+  String command = input.substring(0., endIdx);
+  input.remove(0, command.length() + 1);
+  String arguments = input;
+
+  if (Interpreter::parseCommand(command, arguments))
+    Interpreter::interpretCommand(g.command);
+
+  g.serialRxLineBuffer.nextReadBuffer();
+}
 
 //----------------------------------------------------------------------------------------------------
 void setup() {
@@ -54,45 +93,11 @@ void setup() {
 }
 
 //----------------------------------------------------------------------------------------------------
-void dispatchInput(String &input);
-void readInput(String &inBuffer);
-
-//----------------------------------------------------------------------------------------------------
 void loop() {
-  if (!(g.arduboy.nextFrame()))
-    return;
-    
-  String inBuffer;
-  readInput(inBuffer);
-  dispatchInput(inBuffer);
-}
-
-//----------------------------------------------------------------------------------------------------
-void dispatchInput(String &input)
-{
-  int endIdx = input.indexOf(INTERPRETER_WORD_DELIMITER);
-  String command = input.substring(0., endIdx);
-  input.remove(0, command.length() + 1);
-  String arguments = input;
-
-  if ( 0 == Interpreter::parseCommand(command, arguments)) {
-    Interpreter::interpretCommand(g.command);
-  }
-}
-
-//----------------------------------------------------------------------------------------------------
-void readInput(String& inBuffer) {
-  while (Serial.available()) {
-
-    char inByte = Serial.read();
-    if (inByte != '\n')
-    {
-      inBuffer += inByte;
-    }
-    Serial.write(inByte);
-  }
-
-  inBuffer.trim();
+  //if (!(g.arduboy.nextFrame()))
+  // return;
+  readInput();
+  dispatchInput();
 }
 
 

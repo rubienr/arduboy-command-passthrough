@@ -4,10 +4,10 @@
 extern Globals g;
 
 //----------------------------------------------------------------------------------------------------
-uint8_t CommandInterpreter::parseCommand(String &command, String &arguments)
+bool CommandInterpreter::parseCommand(String &command, String &arguments)
 {
   if (command.length() <= 0)
-    return -1;
+    return false;
 
   g.command.setName(command);
   int separatorIdx = arguments.lastIndexOf(INTERPRETER_MODIFIER_PREFIX) + 1;
@@ -42,7 +42,7 @@ uint8_t CommandInterpreter::parseCommand(String &command, String &arguments)
     g.command.addArgument(modifier, value);
   }
 
-  return 0;
+  return true;
 }
 
 //----------------------------------------------------------------------------------------------------

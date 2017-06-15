@@ -51,7 +51,7 @@ typedef class CommandInterpreter {
       @param command the command name
       @param arguments command arguments: %i %u %s -10 1 "string"
     */
-    static uint8_t parseCommand(String &input, String &arguments);
+    static bool parseCommand(String &input, String &arguments);
 
     /**
       Interprets and executes the command object.
