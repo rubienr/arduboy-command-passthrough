@@ -8,8 +8,8 @@
             "device"      : "Arduboy",
             "author"      : "rubienr",
             "version"     : "0.1",
-            "url"         : "https://github.com/rubienr/arduboy-command-passthrough/arduboy-mate-repository/",
-            "cover"       : "https://github.com/rubienr/arduboy-command-passthrough/arduboy-mate-repository/cover.png",
+            "url"         : "https://github.com/rubienr/arduboy-command-passthrough/",
+            "cover"       : "https://raw.githubusercontent.com/rubienr/arduboy-command-passthrough/master/arduboy-mate-repository/cover.png",
             "hex"         : "https://raw.githubusercontent.com/rubienr/arduboy-command-passthrough/master/arduboy-mate-repository/arduboy-command-passthrough.ino.hex",
             "description" : "A program passing serial commands directly to Arduboy.",
             "model"       : "Production"
