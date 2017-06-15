@@ -1,16 +1,16 @@
 {
-  repository: "Raoul's Arduboy Repo",
-  api-version: "0.5",
-  maintainer: "rubienr@sbox.tugrat.at",
-    items: [
-      {
-        name: "Arduboy Command pass Trhough",
-        author: "rubienr",
-        version: "0.1",
-        cover: "https://github.com/rubienr/arduboy-command-passthrough/arduboy-mate-repository/cover.png",
-        hex: "https://raw.githubusercontent.com/rubienr/arduboy-command-passthrough/master/arduboy-mate-repository/arduboy-command-passthrough.ino.hex",
-        description: "A program passing serial commands directly to Arduboy.",
-        model: "Production"
-      }
+    "repository"  : "Raoul's Arduboy Repo",
+    "api-version" : "0.5",
+    "maintainer"  : "rubienr@sbox.tugrat.at",
+    "items"       : [
+        {
+            "name"        : "Arduboy Command pass Trhough",
+            "author"      : "rubienr",
+            "version"     : "0.1",
+            "cover"       : "https://github.com/rubienr/arduboy-command-passthrough/arduboy-mate-repository/cover.png",
+            "hex"         : "https://raw.githubusercontent.com/rubienr/arduboy-command-passthrough/master/arduboy-mate-repository/arduboy-command-passthrough.ino.hex",
+            "description" : "A program passing serial commands directly to Arduboy.",
+            "model"       : "Production"
+        }
     ]
 }
