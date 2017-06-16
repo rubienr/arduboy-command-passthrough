@@ -1,11 +1,9 @@
 #pragma once
 
-#include <Arduboy2.h>
-#include <SoftwareSerial.h>
+#include <Arduino.h>
 
 #define INTERPRETER_WORD_DELIMITER ' '
 #define INTERPRETER_MODIFIER_PREFIX '%'
-
 
 //----------------------------------------------------------------------------------------------------
 typedef class Command {
@@ -22,8 +20,8 @@ typedef class Command {
     char modifiers[8];
     String values[8];
 
-    void addArgument(char modifier, String &value);
-    void setName(String &name);
+    void addArgument(const char modifier, const String &value);
+    void setName(const String &name);
     String &getName();
     bool isEmpty();
     void reset();
@@ -51,7 +49,7 @@ typedef class CommandInterpreter {
       @param command the command name
       @param arguments command arguments: %i %u %s -10 1 "string"
     */
-    static bool parseCommand(String &input, String &arguments);
+    static bool parseCommand(const String &input, const String &arguments);
 
     /**
       Interprets and executes the command object.

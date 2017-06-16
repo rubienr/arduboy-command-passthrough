@@ -10,7 +10,7 @@
 
   Example commands:
   Connect to the arduboy and send
-  debug 0
+  debug %i 0
   arduboy.clear
   arduboy.setCursor %i %i 10 10
   arduboy.print %s Hello World!
@@ -25,21 +25,17 @@
 
 
   Caveat!
-    The implementation does not verify the modifier yet, which sould map as follows:
-
+  The implementation does not verify the modifier yet, which sould map as follows:
   %s string
   %c char
   %i int
   %u unsigned int
 
-    The reception throughput depends on the current arduboy's frame rate setting.
-
 */
 
-#include <Arduboy2.h>
-#include <SoftwareSerial.h>
-#include "interpreter.h"
+
 #include "globals.h"
+#include "interpreter.h"
 
 typedef CommandInterpreter Interpreter;
 Globals g;
@@ -50,15 +46,13 @@ void readInput()
   while (Serial.available())
   {
     char inByte = Serial.read();
+    Serial.write(inByte);
     if (inByte != '\n')
     {
       g.serialRxLineBuffer.currentWriteBuffer() += inByte;
     } else {
-      Serial.write('|');
-      Serial.write('\n');
       g.serialRxLineBuffer.nextWriteBuffer();
     }
-    Serial.write(inByte);
   }
 }
 
@@ -70,14 +64,12 @@ void dispatchInput()
     return;
   }
 
-  char buffer[30];
-  sprintf(buffer, "interprete buffer -%s-\n", g.serialRxLineBuffer.currentReadBuffer().c_str());
-  Serial.write(buffer);
- 
+  ifDebug(g.log.print("interpret buffer -%s-\n", g.serialRxLineBuffer.currentReadBuffer().c_str()));
+  
   String &input = g.serialRxLineBuffer.currentReadBuffer();
 
   int endIdx = input.indexOf(INTERPRETER_WORD_DELIMITER);
-  String command = input.substring(0., endIdx);
+  String command = input.substring(0, endIdx);
   input.remove(0, command.length() + 1);
   String arguments = input;
 

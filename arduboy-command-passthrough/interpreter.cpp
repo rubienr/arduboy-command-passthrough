@@ -4,7 +4,7 @@
 extern Globals g;
 
 //----------------------------------------------------------------------------------------------------
-bool CommandInterpreter::parseCommand(String &command, String &arguments)
+bool CommandInterpreter::parseCommand(const String &command, const String &arguments)
 {
   if (command.length() <= 0)
     return false;
@@ -50,15 +50,14 @@ void CommandInterpreter::interpretCommand(Command &command) {
   if (command.isEmpty())
     return;
 
-  if (DEBUG_ON == g.debugLevel) {
-    char buffer[30];
-    sprintf(buffer, "#: %d\n", command.numArguments);
-    Serial.write(buffer);
-    for (uint8_t idx = 0; idx < command.numArguments; idx++) {
-      sprintf(buffer, "i: %d m: %c v: %s-\n", idx, command.modifiers[idx], command.values[idx].c_str());
-      Serial.write(buffer);
+  ifDebug(
+    g.log.print("cmd: -%s-\n", command.getName().c_str());
+    g.log.print("#args: %d\n", command.numArguments);
+    for (uint8_t idx = 0; idx < command.numArguments; idx++) 
+    {
+      g.log.print("#: %d mod: %c val: -%s-\n", idx, command.modifiers[idx], command.values[idx].c_str());
     }
-  }
+  );
 
   if (0 == command.getName().compareTo("arduboy.setCursor") && command.numArguments == 2) {
     int x = command.values[0].toInt();
@@ -100,7 +99,7 @@ void CommandInterpreter::interpretCommand(Command &command) {
 }
 
 //----------------------------------------------------------------------------------------------------
-void Command::addArgument(char modifier, String &value) {
+void Command::addArgument(const char modifier, const String &value) {
   modifiers[numArguments] = modifier;
   values[numArguments] = value;
   ++numArguments;
@@ -108,7 +107,7 @@ void Command::addArgument(char modifier, String &value) {
 }
 
 //----------------------------------------------------------------------------------------------------
-void Command::setName(String &name) {
+void Command::setName(const String &name) {
   reset();
   mName = name;
   mIsEmpty = false;
