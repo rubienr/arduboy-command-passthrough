@@ -40,7 +40,7 @@ class SerialConnection():
 
         if self.serial.isOpen():
             parity = {0:"N", 1:"Y"}[self.serial.parity()]
-            self.parent.log("{} connected {}{}{}".format(serialPortSystemLocation, self.serial.baudRate(), parity, self.serial.stopBits()))
+            self.parent.log("{} connected {} {}{}{}".format(serialPortSystemLocation, self.serial.baudRate(), self.serial.dataBits(), parity, self.serial.stopBits()))
             self.parent.onPortConnected()
         else:
             self.parent.log("failed to connect {}".format(serialPortSystemLocation))
