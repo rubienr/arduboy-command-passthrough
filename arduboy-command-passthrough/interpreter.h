@@ -16,9 +16,9 @@ typedef class Command {
 
   public:
 
-    uint8_t numArguments;
-    char modifiers[8];
-    String values[8];
+    uint8_t numArguments : 4;
+    char modifiers[16];
+    String values[16];
 
     void addArgument(const char modifier, const String &value);
     void setName(const String &name);

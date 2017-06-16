@@ -7,7 +7,10 @@ extern Globals g;
 bool CommandInterpreter::parseCommand(const String &command, const String &arguments)
 {
   if (command.length() <= 0)
+  {
+    ifDebug(g.log.print("failed parse cmd args -%s-\n", arguments.c_str()));
     return false;
+  }
 
   g.command.setName(command);
   int separatorIdx = arguments.lastIndexOf(INTERPRETER_MODIFIER_PREFIX) + 1;
@@ -50,35 +53,33 @@ void CommandInterpreter::interpretCommand(Command &command) {
   if (command.isEmpty())
     return;
 
+  bool isInterpreted = true;
+
   ifDebug(
     g.log.print("cmd: -%s-\n", command.getName().c_str());
     g.log.print("#args: %d\n", command.numArguments);
-    for (uint8_t idx = 0; idx < command.numArguments; idx++) 
-    {
-      g.log.print("#: %d mod: %c val: -%s-\n", idx, command.modifiers[idx], command.values[idx].c_str());
-    }
+    for (uint8_t idx = 0; idx < command.numArguments; idx++)
+{
+  g.log.print("#: %d mod: %c val: -%s-\n", idx, command.modifiers[idx], command.values[idx].c_str());
+  }
   );
 
   if (0 == command.getName().compareTo("arduboy.setCursor") && command.numArguments == 2) {
     int x = command.values[0].toInt();
     int y = command.values[1].toInt();
     g.arduboy.setCursor(x, y);
-    Serial.write("OK");
   }
 
   else if (0 == command.getName().compareTo("arduboy.clear") && command.numArguments == 0) {
     g.arduboy.clear();
-    Serial.write("OK");
   }
 
   else if (0 == command.getName().compareTo("arduboy.display") && command.numArguments == 0) {
     g.arduboy.display();
-    Serial.write("OK");
   }
 
   else if (0 == command.getName().compareTo("arduboy.print") && command.numArguments == 1) {
     g.arduboy.print(g.command.values[0]);
-    Serial.write("OK");
   }
 
   else if (0 == command.getName().compareTo("debug") && command.numArguments == 1) {
@@ -87,14 +88,21 @@ void CommandInterpreter::interpretCommand(Command &command) {
     } else {
       g.debugLevel = DEBUG_ON;
     }
-    Serial.write("OK");
   }
 
   else {
-    Serial.write("NOK");
+    isInterpreted = false;
   }
 
-  Serial.write('\n');
+  if (isInterpreted)
+  {
+    g.log.print("OK\n");
+  }
+  else
+  {
+    g.log.print("NOK\n");
+  }
+
   command.reset();
 }
 

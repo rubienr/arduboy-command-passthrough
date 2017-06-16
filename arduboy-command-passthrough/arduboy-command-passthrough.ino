@@ -46,7 +46,7 @@ void readInput()
   while (Serial.available())
   {
     char inByte = Serial.read();
-    Serial.write(inByte);
+    //Serial.write(inByte);
     if (inByte != '\n')
     {
       g.serialRxLineBuffer.currentWriteBuffer() += inByte;

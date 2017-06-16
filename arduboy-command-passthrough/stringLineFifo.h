@@ -6,9 +6,9 @@
 typedef class StringLineFifo {
   private:
 
-    String  buffers[8];
-    uint8_t startIdx   : 3;
-    uint8_t endIdx     : 3;
+    String  buffers[16];
+    uint8_t startIdx   : 4;
+    uint8_t endIdx     : 4;
 
   protected:
 
