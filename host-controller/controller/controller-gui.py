@@ -16,11 +16,26 @@ class SerialConnection():
 
 
     def connect(self):
-        self.serial = QSerialPort("/dev/ttyACM0")
+        availablePortNames=self.getAvailablePortNames()
+        print("available ports: {}".format(availablePortNames))
+        serialPort="ttyACM0"
+        print("connecting to {}...".format(serialPort))
+        if serialPort not in availablePortNames:
+          self.parent.onPortDisconnected()
+          return
+
+        serialPort="/dev/{}".format(serialPort)
+        print("connected to {}".format(serialPort))
+        self.serial = QSerialPort(serialPort)
         self.serial.setBaudRate(self.serial.Baud9600)
         self.serial.open(QIODevice.ReadWrite)
 
         self.serial.readyRead.connect(self.__read)
+
+        if self.serial.isOpen():
+          self.parent.onPortConnected()
+        else:
+          self.parent.onPortDisconnected()
 
     def disconnect(self):
         self.serial.close()
@@ -38,11 +53,11 @@ class SerialConnection():
             self.serial.write(bytes)
             print("sending: {}".format(bytes))
 
-    def getPorts(self):
-        return QSerialPortInfo.availablePorts()
+    def getAvailablePortNames(self):
+        return [p.portName() for p in QSerialPortInfo.availablePorts()]
 
     def printAvailablePorts(self):
-        ports = self.getPorts()
+        ports = QSerialPortInfo.availablePorts()
         for port in ports:
             pid = port.productIdentifier()
             vid = port.vendorIdentifier()
@@ -64,7 +79,11 @@ class CommandEditor(QDialog):
         self.serial = SerialConnection(parent=self)
         self.serial.printAvailablePorts()
 
+    def onPortConnected(self):
+        self.ui.cbConnect.setChecked(True)
 
+    def onPortDisconnected(self):
+        self.ui.cbConnect.setChecked(False)
 
 
     def consumeData(self, inData):
